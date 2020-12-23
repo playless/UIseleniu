@@ -118,7 +118,7 @@ def test_cookie():
 def test_get_cookie():
     opt = webdriver.ChromeOptions()
     # 设置debug地址
-    opt.debugger_address = "127.0.0.1:4444"
+    opt.debugger_address = "127.0.0.1:9222"
     driver = webdriver.Chrome(options=opt)
     driver.implicitly_wait(5)
     driver.get("https://work.weixin.qq.com/wework_admin/frame#contacts")

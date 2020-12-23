@@ -6,6 +6,7 @@ from webSelenium.pages.partyPage import PartyPage
 
 
 class ContactsPage(BasePage):
+    _location_dropdpwn=(By.CSS_SELECTOR,'.member_colLeft_top_addBtnWrap ,.js_create_dropdown')
 
     '''通讯录页面'''
     def add_mbmber(self):
@@ -13,19 +14,19 @@ class ContactsPage(BasePage):
         '''添加成员，并跳转到添加成员页面'''
 
         return AddMemberPage(self.driver)
-    def add_patry(self):
+    def add_patry(self,name,name_en):
         '''添加部门,并跳转部门添加成员页面'''
-        self.driver.find_element(By.CSS_SELECTOR,'.member_colLeft_top_addBtnWrap ,.js_create_dropdown').click()
-        self.driver.find_element(By.CSS_SELECTOR,'.js_create_party').click()
-        self.driver.find_element(By.NAME,'name').send_keys("less1")
-        self.driver.find_element(By.NAME,'name').send_keys("秦国")
-        self.driver.find_element(By.NAME,'name_en').send_keys("qinguo")
-        self.driver.find_element(By.CSS_SELECTOR,'.js_toggle_party_list').click()
-        eles=self.driver.find_elements(By.XPATH,'//*[@id="1688854153665670_anchor"][1]')
+        self.find(*self._location_dropdpwn).click()
+        self.find(By.CSS_SELECTOR,'.js_create_party').click()
+        # self.find(By.NAME,'name').send_keys("less1")
+        self.find(By.NAME,'name').send_keys(name)
+        self.find(By.NAME,'name_en').send_keys(name_en)
+        self.find(By.CSS_SELECTOR,'.js_toggle_party_list').click()
+        eles=self.finds(By.XPATH,'//*[@id="1688854153665670_anchor"][1]')
         eles[1].click()
 
 
-        self.driver.find_element(By.XPATH,"//*[text()='确定']").click()
+        self.find(By.XPATH,"//*[text()='确定']").click()
         return PartyPage(self.driver)
 
 
